@@ -6,6 +6,7 @@
 #include <string_view>
 #include <vector>
 
+#include "pixel.hpp"
 #include "layer.hpp"
 
 namespace pixart {
@@ -36,7 +37,11 @@ class canvas {
 public:
     canvas() = delete;
     canvas(uint32_t _width, uint32_t _height) : m_width(_width), m_height(_height) {}
-
+    
+    std::vector<canvas_layer>::iterator add_layer(RGBApixel default_pixel) {
+        m_canvas_layers.emplace_back(m_width, m_height, default_pixel);
+        return m_canvas_layers.end()-1;
+    };
 private:
     uint32_t m_width;
     uint32_t m_height;
